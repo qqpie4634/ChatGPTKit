@@ -81,3 +81,58 @@ struct Response {
 - macOS 13.0+
 - watchOS 9.0+
 - tvOS 16.0+
+
+
+## 直接執行（Windows / Python）
+如果你是 Windows 使用者，現在可以直接用 Python 版本執行：
+
+1. 安裝 Python 3.10+
+2. 打開命令提示字元（CMD）並切到專案資料夾
+3. 執行：`py python_chesscli\chesscli.py`
+
+範例：
+```bash
+py python_chesscli\chesscli.py
+> move e2e4 3
+> move e7e5 3
+> best 3
+> state
+> quit
+```
+
+也可以直接雙擊 `python_chesscli\run_chesscli.bat` 啟動。
+
+可用指令：
+- `move <uci> [depth]`：輸入一步棋並立即分析
+- `best [depth]`：分析目前最佳下一步
+- `state`：顯示目前對局狀態
+- `help`：顯示說明
+- `quit`：離開程式
+
+## Chess 分析器（新功能）
+你可以用內建的 `ChessGameAnalyzer` 來記錄每一步棋，並在每一步後拿到建議下法。
+
+```swift
+import ChatGPTKit
+
+let analyzer = ChessGameAnalyzer()
+
+// 輸入你和朋友每一步（UCI 格式）
+try analyzer.recordMove("e2e4", depth: 3)
+try analyzer.recordMove("e7e5", depth: 3)
+
+// 取得目前局面的最佳建議
+let analysis = analyzer.suggestBestMove(depth: 3)
+print("Best move:", analysis.bestMove?.uci ?? "(none)")
+print("Eval:", analysis.evaluation)
+print("PV:", analysis.principalVariation.map(\.uci))
+```
+
+### 目前支援
+- 合法走法驗證
+- 對局狀態判斷（進行中、將死、和局）
+- Minimax + Alpha-Beta 剪枝的最佳下法搜尋
+- UCI 走法輸入（例如 `e2e4`、`e7e8q`）
+
+### 備註
+目前為輕量版引擎，尚未包含王車易位（castling）與吃過路兵（en passant）。
