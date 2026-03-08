@@ -83,22 +83,24 @@ struct Response {
 - tvOS 16.0+
 
 
-## 直接執行（命令列）
-如果你只是想「直接跑程式」分析對局，請用這個：
+## 直接執行（Windows / Python）
+如果你是 Windows 使用者，現在可以直接用 Python 版本執行：
 
-1. 打開終端機進到專案資料夾
-2. 執行：`swift run ChessCLI`
-3. 在 CLI 輸入指令
+1. 安裝 Python 3.10+
+2. 打開命令提示字元（CMD）並切到專案資料夾
+3. 執行：`py python_chesscli\chesscli.py`
 
 範例：
 ```bash
-swift run ChessCLI
+py python_chesscli\chesscli.py
 > move e2e4 3
 > move e7e5 3
 > best 3
 > state
 > quit
 ```
+
+也可以直接雙擊 `python_chesscli\run_chesscli.bat` 啟動。
 
 可用指令：
 - `move <uci> [depth]`：輸入一步棋並立即分析

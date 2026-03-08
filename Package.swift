@@ -16,9 +16,6 @@ let package = Package(
         .library(
             name: "ChatGPTKit",
             targets: ["ChatGPTKit"]),
-        .executable(
-            name: "ChessCLI",
-            targets: ["ChessCLI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -30,9 +27,6 @@ let package = Package(
         .target(
             name: "ChatGPTKit",
             dependencies: []),
-        .executableTarget(
-            name: "ChessCLI",
-            dependencies: ["ChatGPTKit"]),
         .testTarget(
             name: "ChatGPTKitTests",
             dependencies: ["ChatGPTKit"]),
